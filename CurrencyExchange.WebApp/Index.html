@@ -1,0 +1,190 @@
+﻿<html>
+<head>
+    <title> Currency Exchange Rates </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script src="wwwroot/javascript/custom.js"></script>
+    <script src="wwwroot/javascript/bootstrap.min.js"></script>
+    <script src="wwwroot/javascript/popper.min.js"></script>
+    <script src="wwwroot/javascript/chart.js"></script>
+    <link href="wwwroot/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="wwwroot/css/style.css" rel="stylesheet" />
+
+
+
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="CurrencyExchangeCalculation.html">Currency Exchange Calculation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="Index.html">Currency Exchange Rates</a>
+            </li>
+        </ul>
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Currency Exchange Rates</legend>
+            <div class="row">
+                <div class="form-group row">
+                    <label for="BaseCurrency" class="col-sm-2 col-form-label col-form-label-sm">Base Currency</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" name="scode" id="scode" required>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select Source currency.
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="form-group row">
+                    <label for="Target Currency" class="col-sm-2 col-form-label col-form-label-sm">Target Currency</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" name="tcode" id="tcode" required>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select Target currency.
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="form-group row">
+                    <label for="Date" class="col-sm-2 col-form-label col-form-label-sm">From Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control form-control-sm" name="date" id="fromDate" />
+                    </div>
+                </div>
+                <br /><br />
+                <div class="form-group row">
+                    <label for="Date" class="col-sm-2 col-form-label col-form-label-sm">To Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control form-control-sm" name="date" id="toDate" />
+                    </div>
+                </div>
+                <br /><br />
+                <div class="col-sm-2">
+                    <button type="submit" onclick="loadExchangeRates()" class="btn btn-primary">Submit</button>
+                </div>
+                <br /><br />
+                <div id="divalert" class="alert alert-danger" style="display:none;" role="alert">
+                    No records found!
+                </div>
+            </div>
+
+        </fieldset>
+        <div id="personinfo"> </div>
+
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div>
+
+    </div>
+
+    <script>
+
+
+        function loadExchangeRates() {
+            debugger;
+            var xmlhttp = new XMLHttpRequest();
+            var scode = document.getElementById('scode').value;
+            var tcode = document.getElementById('tcode').value;
+            var fromdate = document.getElementById('fromDate').value;
+            var todate = document.getElementById('toDate').value;
+
+
+            var apiUrl = baseurl + "/rates/GetCurrencyExchangeRateByPeriod/" + scode + "/" + tcode + "/" + fromdate + "/" + todate + "";
+        
+            xmlhttp.open("GET", apiUrl, true);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    var rates = JSON.parse(xmlhttp.responseText);
+                    var elem = document.getElementById('divalert');
+                    if (rates.length == 0) {
+                        elem.style.display = 'inline'
+                    }
+                    else {
+                        elem.style.display = 'none'
+                        var tbltop = "<table class='table table-bordered'> <thead class='thead-dark'><tr><th scope='col'>Recorded On</th><th scope='col'>Exchange Rate</th></tr></thead>";
+                        //main table content we fill from data from the rest call
+                        var main = "";
+                        var array1 = [];
+                        var array2 = [];
+                        for (var i = 0; i < rates.length; i++) {
+                            var exchange = rates[i];
+                            debugger;
+                            var recordDate = exchange.recordedON;
+                            recordDate = new Date(recordDate).toLocaleDateString('en-us', { month: "short", day: "numeric" });
+                            main += "<tbody><tr><td>" + recordDate + "</td><td>" + exchange.exchangeRates + "</td></tr> ";
+                            array1.unshift(recordDate);
+                            array2.unshift(exchange.exchangeRates);
+                        }
+
+                        var tblbottom = "</tbody></table>";
+                        var tbl = tbltop + main + tblbottom;
+                        document.getElementById("personinfo").innerHTML = tbl;
+                        const ctx = document.getElementById("myChart");
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: array1,
+                                datasets: [{
+                                    label: 'Exchange Rates',
+                                    data: array2,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+
+
+                                }
+                            }
+                        });
+                    }
+                    //var tbltop = "<table class='table table-bordered'> <thead class='thead-dark'><tr><th scope='col'>Recorded On</th><th scope='col'>Exchange Rate</th></tr></thead>";
+                    ////main table content we fill from data from the rest call
+                    //var main = "";
+                    //var array1 = [];
+                    //var array2 = [];
+                    //for (var i = 0; i < rates.length; i++) {
+                    //    var exchange = rates[i];
+                    //    debugger;
+                    //    var recordDate = exchange.recordedON;
+                    //    recordDate = new Date(recordDate).toLocaleDateString('en-us', { month: "short", day: "numeric" });
+                    //    main += "<tbody><tr><td>" + recordDate + "</td><td>" + exchange.exchangeRates + "</td></tr> ";
+                    //    array1.unshift(recordDate);
+                    //    array2.unshift(exchange.exchangeRates);
+                    //}
+
+                    //var tblbottom = "</tbody></table>";
+                    //var tbl = tbltop + main + tblbottom;
+                    //document.getElementById("personinfo").innerHTML = tbl;
+                    //const ctx = document.getElementById("myChart");
+                    //new Chart(ctx, {
+                    //    type: 'line',
+                    //    data: {
+                    //        labels: array1,
+                    //        datasets: [{
+                    //            label: 'Exchange Rates',
+                    //            data: array2,
+                    //            borderWidth: 1
+                    //        }]
+                    //    },
+                    //    options: {
+                    //        scales: {
+
+
+                    //        }
+                    //    }
+                    //});
+                }
+            };
+            xmlhttp.send();
+
+
+
+        }
+    </script>
+</body>
+</html>
