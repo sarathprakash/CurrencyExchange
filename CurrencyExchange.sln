@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.APIService", "CurrencyExchange.APIService\CurrencyExchange.APIService.csproj", "{2C301464-4C03-4AEA-8EA7-6F118AB09529}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.APIService.Models", "CurrencyExchange.APIService.Models\CurrencyExchange.APIService.Models.csproj", "{50D048F2-8539-4B04-842F-361232FA0D52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.APIService.Contracts", "CurrencyExchange.APIService.Contracts\CurrencyExchange.APIService.Contracts.csproj", "{6E931817-B823-4EE7-8571-39A05844A87E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.APIService.DataAccess", "CurrencyExchange.APIService.DataAccess\CurrencyExchange.APIService.DataAccess.csproj", "{0DCF61CF-2A5F-4908-9CB0-10DCF9F1E0CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.ConsoleApp", "CurrencyExchange.ConsoleApp\CurrencyExchange.ConsoleApp.csproj", "{E5FB63E6-558E-4151-81FF-A38F06BE9166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.Xunit.Test", "CurrencyExchange.Xunit.Test\CurrencyExchange.Xunit.Test.csproj", "{014EE420-2195-4EAC-ABD0-C4E7B5E0A747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchange.ScheduledFunction", "CurrencyExchange.ScheduledFunction\CurrencyExchange.ScheduledFunction.csproj", "{97DEEF42-ABDC-44CF-9BF6-DCFDA6629E30}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CurrencyExchange.Web", "http://localhost:51371", "{125193A6-8197-4966-8B0E-905399C5E9F9}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51371"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\OneDrive\Documents\My Web Sites\CurrencyExchange.Web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51371\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51371"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\OneDrive\Documents\My Web Sites\CurrencyExchange.Web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51371\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\..\..\OneDrive\Documents\My Web Sites\CurrencyExchange.Web\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C301464-4C03-4AEA-8EA7-6F118AB09529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C301464-4C03-4AEA-8EA7-6F118AB09529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C301464-4C03-4AEA-8EA7-6F118AB09529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C301464-4C03-4AEA-8EA7-6F118AB09529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50D048F2-8539-4B04-842F-361232FA0D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50D048F2-8539-4B04-842F-361232FA0D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50D048F2-8539-4B04-842F-361232FA0D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50D048F2-8539-4B04-842F-361232FA0D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E931817-B823-4EE7-8571-39A05844A87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E931817-B823-4EE7-8571-39A05844A87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E931817-B823-4EE7-8571-39A05844A87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E931817-B823-4EE7-8571-39A05844A87E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DCF61CF-2A5F-4908-9CB0-10DCF9F1E0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DCF61CF-2A5F-4908-9CB0-10DCF9F1E0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DCF61CF-2A5F-4908-9CB0-10DCF9F1E0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DCF61CF-2A5F-4908-9CB0-10DCF9F1E0CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5FB63E6-558E-4151-81FF-A38F06BE9166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5FB63E6-558E-4151-81FF-A38F06BE9166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5FB63E6-558E-4151-81FF-A38F06BE9166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5FB63E6-558E-4151-81FF-A38F06BE9166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{014EE420-2195-4EAC-ABD0-C4E7B5E0A747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{014EE420-2195-4EAC-ABD0-C4E7B5E0A747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{014EE420-2195-4EAC-ABD0-C4E7B5E0A747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{014EE420-2195-4EAC-ABD0-C4E7B5E0A747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97DEEF42-ABDC-44CF-9BF6-DCFDA6629E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97DEEF42-ABDC-44CF-9BF6-DCFDA6629E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97DEEF42-ABDC-44CF-9BF6-DCFDA6629E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97DEEF42-ABDC-44CF-9BF6-DCFDA6629E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{125193A6-8197-4966-8B0E-905399C5E9F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{125193A6-8197-4966-8B0E-905399C5E9F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{125193A6-8197-4966-8B0E-905399C5E9F9}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{125193A6-8197-4966-8B0E-905399C5E9F9}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1600993-54D8-4EA2-A497-9EFD0A734F86}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "CurrencyExchange.ScheduledFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7179",
+      "launchBrowser": false
+    }
+  }
+}
