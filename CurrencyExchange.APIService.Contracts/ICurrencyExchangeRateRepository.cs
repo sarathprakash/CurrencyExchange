@@ -11,5 +11,6 @@ namespace CurrencyExchange.APIService.Contracts
         List<CurrencyExchangeRateOnPeriodModel?> GetCurrencyExchangeRateByPeriod(string sourceCurrencyCode, string targetCurrencyCode, DateTime fromDate, DateTime toDate);
         Task<bool> SaveCurrencyExchangeRate(string sourceCurrencyCode, string targetCurrencyCode);
         List<Currency> GetCurrencyCodes();
+        List<UserDetails> GetUserDetails();
     }
 }

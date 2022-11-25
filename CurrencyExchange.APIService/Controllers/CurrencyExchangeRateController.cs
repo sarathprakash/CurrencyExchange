@@ -15,31 +15,33 @@ namespace CurrencyExchange.APIService.Controllers
 
         [HttpGet]
         [Route("Authorize")]
-        public IResult AuthorizeUser(User user)
+        public IResult AuthorizeUser(UserDetails user)
         {
             try
             {
                 logger.LogInformation("AuthorizeUser started to executing");
-                string username = user.username = "Sarath";
-                string password = user.password = "Test1234";
+                var userdetails= currencyExchangeRateRepository.GetUserDetails();
+                string? username = userdetails[0].Username;
+                string? password = userdetails[0].Password;
 
-                if (username == user.username && password == user.password)
+                if (username == user.Username && password == user.Password)
                 {
                     var claims = new[]
-                {
-                new Claim(ClaimTypes.NameIdentifier,user.username),
-                new Claim(ClaimTypes.NameIdentifier,user.password)
-            };
+                    {
+                        new Claim(ClaimTypes.NameIdentifier,user.Username),
+                        new Claim(ClaimTypes.NameIdentifier,user.Password)
+                    };
 
+                    var Config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("Jwt");
                     var token = new JwtSecurityToken
                     (
-                        issuer: "https://localhost:7050/",
-                        audience: "https://localhost:7050/",
+                        issuer: Config["Issuer"],
+                        audience: Config["Audience"],
                         claims: claims,
                         expires: DateTime.UtcNow.AddDays(60),
                         notBefore: DateTime.UtcNow,
                         signingCredentials: new SigningCredentials(
-                            new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DhftOS5uphK3vmCJQrexST1RsyjZBjXWRgJMFPU4")),
+                            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["Key"])),
                             SecurityAlgorithms.HmacSha256)
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
@@ -55,12 +57,6 @@ namespace CurrencyExchange.APIService.Controllers
                 logger.LogError("AuthorizeUser failed");
                 throw new Exception(ex.Message);
             }
-        }
-
-        public class User
-        {
-            public string username { get; set; }
-            public string password { get; set; }
         }
 
         [HttpGet]

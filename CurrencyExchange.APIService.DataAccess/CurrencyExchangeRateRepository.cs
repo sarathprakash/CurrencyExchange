@@ -150,5 +150,19 @@ namespace CurrencyExchange.APIService.DataAccess
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<UserDetails> GetUserDetails()
+        {
+            try
+            {
+                const string sql = "select *  from UserDetails";
+                var userDetails = _connection.Query<UserDetails>(sql);
+                return userDetails.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
