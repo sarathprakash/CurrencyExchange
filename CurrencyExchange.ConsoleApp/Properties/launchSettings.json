@@ -2,11 +2,11 @@
   "profiles": {
     "CurrencyExchange.ConsoleApp": {
       "commandName": "Project",
-      "commandLineArgs": "get USD INR,EUR 1"
+      "commandLineArgs": "GET NOK INR 1"
     },
     "Profile 1": {
       "commandName": "Project",
-      "commandLineArgs": "save USD INR"
+      "commandLineArgs": "SAVE NOK INR"
     }
   }
 }

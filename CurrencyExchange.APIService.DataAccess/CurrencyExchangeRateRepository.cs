@@ -1,13 +1,4 @@
-﻿using Dapper;
-using Newtonsoft.Json;
-using System.Data;
-using System.Text;
-using CurrencyExchange.APIService.Models.ViewModels;
-using CurrencyExchange.APIService.Models;
-using CurrencyExchange.APIService.Contracts;
-using CurrencyExchange.APIService.DataAccess.Helpers;
-
-namespace CurrencyExchange.APIService.DataAccess
+﻿namespace CurrencyExchange.APIService.DataAccess
 {
     public class CurrencyExchangeRateRepository : ICurrencyExchangeRateRepository
     {
@@ -22,8 +13,8 @@ namespace CurrencyExchange.APIService.DataAccess
         {
             try
             {
-                // Call API here
-                string baseURI = "https://api.apilayer.com";
+                // Calling External Fixer API here
+                string baseURI = Constants.baseURI;
                 string requestParam = date == null ? string.Format(Constants.ExternalApiLatestRateRoute, targetCurrencyCode, sourceCurrencyCode)
                     : string.Format(Constants.ExternalApiGivenDateRateRoute, date.Value.ToString("yyyy-MM-dd"), targetCurrencyCode, sourceCurrencyCode);
 

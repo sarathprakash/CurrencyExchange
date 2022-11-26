@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CurrencyExchange.APIService.DataAccess.Helpers
+﻿namespace CurrencyExchange.APIService.DataAccess.Helpers
 {
     public static class HttpClientHelper
     {
@@ -15,8 +9,8 @@ namespace CurrencyExchange.APIService.DataAccess.Helpers
             {
                 client.BaseAddress = new Uri(baseURI);
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Add(Constants.ApiKey, "x6mZ63yFan2RNtnXyykdKek4C9FIIImM");
-                HttpRequestMessage request = null;
+                client.DefaultRequestHeaders.Add(Constants.ApiKey, Constants.ApiKeyValue);
+                HttpRequestMessage? request = null;
                 if (httpMethod == "GET")
                 {
                     request = new HttpRequestMessage(HttpMethod.Get, requestParam);

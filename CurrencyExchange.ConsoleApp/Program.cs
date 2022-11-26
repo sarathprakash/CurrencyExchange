@@ -17,7 +17,7 @@ var repository = serviceProvider.GetService<ICurrencyExchangeRateRepository>();
 var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<Program>();
 
 var operationType = args[0];
-if (operationType == "get") //Get currency exchange rate
+if (operationType == "GET") //Get currency exchange rate
 {
     var sCode = args[1];
     var tCode = args[2];
@@ -34,7 +34,7 @@ if (operationType == "get") //Get currency exchange rate
 
         foreach (var item in model.ExchangeRates)
         {
-            logger.LogInformation($"1 {sCode} equals {item.Value} {item.Key}  ");
+            logger.LogInformation($"{amount} {sCode} equals {item.Value} {item.Key}  ");
         }
         Console.ReadKey();
     }
@@ -43,7 +43,7 @@ if (operationType == "get") //Get currency exchange rate
         Console.WriteLine("GET operation failed : \n\t" + ex);
     }
 }
-else if (operationType == "save")  //Save currency exchange rates
+else if (operationType == "SAVE")  //Save currency exchange rates
 {
     bool result = false;
     var sCode = args[1];

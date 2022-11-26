@@ -1,5 +1,4 @@
-﻿
-namespace CurrencyExchange.Xunit.Test
+﻿namespace CurrencyExchange.Xunit.Test
 {
     public class CurrencyExchangeTest
     {
@@ -38,8 +37,6 @@ namespace CurrencyExchange.Xunit.Test
                 throw new Exception(ex.Message);
             }
         }
-
-
         private IDbConnection InitializeDb()
         {
             SqlConnection connection = new SqlConnection("Server= SARATHPRAKASH; Database= DB_CurrencyExchange; Integrated Security=True;");

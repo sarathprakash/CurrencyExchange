@@ -21,7 +21,7 @@ namespace CurrencyExchange.ScheduledFunction
                 log.LogInformation(fileName);
                 process.StartInfo.FileName = fileName;
                 //string arguments = Environment.GetEnvironmentVariable("Arguments");
-                string arguments = "save KWD INR";
+                string arguments = "SAVE NOK INR";
                 process.StartInfo.Arguments = arguments;
                 log.LogInformation(arguments);
                 process.StartInfo.UseShellExecute = false;
