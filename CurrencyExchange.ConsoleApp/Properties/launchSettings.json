@@ -1,12 +1,16 @@
 {
   "profiles": {
-    "CurrencyExchange.ConsoleApp": {
-      "commandName": "Project",
-      "commandLineArgs": "GET NOK INR 1"
-    },
-    "Profile 1": {
+    "CurrencyExchange.SAVE": {
       "commandName": "Project",
       "commandLineArgs": "SAVE NOK INR"
+    },
+    "CurrencyExchange.GETBYDATE": {
+      "commandName": "Project",
+      "commandLineArgs": "GET NOK INR 100 2010-01-01"
+    },
+    "CurrencyExchange.GET": {
+      "commandName": "Project",
+      "commandLineArgs": "GET NOK INR 1"
     }
   }
 }

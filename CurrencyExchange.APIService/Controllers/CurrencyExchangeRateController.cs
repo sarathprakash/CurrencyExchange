@@ -80,12 +80,12 @@ namespace CurrencyExchange.APIService.Controllers
 
         [HttpGet]
         [Route("GetCurrencyExchangeRate/{sourceCurrency}/{targetCurrency}/{amount}")]
-        public async Task<CurrencyExchangeRateModel?> GetCurrencyExchangeRate(string sourceCurrency, string targetCurrency, long amount, DateTime? date)
+        public async Task<CurrencyExchangeRateModel?> GetCurrencyExchangeRate(string sourceCurrency, string targetCurrency, long amount)
         {
             try
             {
                 logger.LogInformation("GetCurrencyExchangeRate started to executing");
-                var exchangeRates = await currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targetCurrency, amount, date);
+                var exchangeRates = await currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targetCurrency, amount,null);
                 return exchangeRates;
             }
             catch (Exception ex)
@@ -94,23 +94,22 @@ namespace CurrencyExchange.APIService.Controllers
                 throw new Exception(ex.Message);
             }
         }
-
-        //[HttpGet]
-        //[Route("GetCurrencyExchangeRateByPeriod/{sourceCurrency}/{fromDate}/{toDate}")]
-        //public CurrencyExchangeRateOnPeriodModel? GetCurrencyExchangeRateByPeriod(string sourceCurrency, DateTime fromDate, DateTime toDate)
-        //{
-        //    try
-        //    {
-        //        logger.LogInformation("GetCurrencyExchangeRateByPeriod started to executing");
-        //        var result = currencyExchangeRateRepository.GetCurrencyExchangeRateByPeriod(sourceCurrency, fromDate, toDate);
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError("GetCurrencyExchangeRateByPeriod failed");
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+        [HttpGet]
+        [Route("GetCurrencyExchangeRateByDate/{sourceCurrency}/{targetCurrency}/{amount}/{date}")]
+        public async Task<CurrencyExchangeRateModel?> GetCurrencyExchangeRateByDate(string sourceCurrency, string targetCurrency, long amount, DateTime? date)
+        {
+            try
+            {
+                logger.LogInformation("GetCurrencyExchangeRateByDate started to executing");
+                var exchangeRates = await currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targetCurrency, amount, date);
+                return exchangeRates;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("GetCurrencyExchangeRateByDate failed");
+                throw new Exception(ex.Message);
+            }
+        }
         [HttpGet]
         [Route("GetCurrencyExchangeRateByPeriod/{sourceCurrency}/{targetCurrency}/{fromDate}/{toDate}")]
         public IEnumerable<CurrencyExchangeRateOnPeriodModel?> GetCurrencyExchangeRateByPeriod(string sourceCurrency, string targetCurrency, DateTime fromDate, DateTime toDate)

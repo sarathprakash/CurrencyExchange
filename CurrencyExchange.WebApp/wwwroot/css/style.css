@@ -14,3 +14,7 @@ legend.scheduler-border {
     padding: 0 10px;
     border-bottom: none;
 }
+
+select {
+    -webkit-appearance: listbox !important
+}

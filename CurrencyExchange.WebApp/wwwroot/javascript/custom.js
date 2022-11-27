@@ -3,8 +3,8 @@
     loadTargetCurency();
     document.getElementById('fromDate').valueAsDate = new Date();
     document.getElementById('toDate').valueAsDate = new Date();
-
 };
+
 
 var baseurl = "https://localhost:7050/api";
 function loadBaseCurency() {
@@ -44,50 +44,118 @@ function loadTargetCurency() {
     };
 }
 
-//function loadExchangeRates() {
-//    debugger;
-//    var xmlhttp = new XMLHttpRequest();
-//    var scode = document.getElementById('scode').value;
-//    var amount = document.getElementById('amount').value;
-//    var date = document.getElementById('date').value;
+function loadExchangeRatesChart() {
+    debugger;
+    var xmlhttp = new XMLHttpRequest();
+    var scode = document.getElementById('scode').value;
+    var tcode = document.getElementById('tcode').value;
+    var fromdate = document.getElementById('fromDate').value;
+    var todate = document.getElementById('toDate').value;
 
-//    var fromdate = '2022-11-20';
-//    var todate = '2022-11-22';
+    var apiUrl = baseurl + "/rates/GetCurrencyExchangeRateByPeriod/" + scode + "/" + tcode + "/" + fromdate + "/" + todate + "";
 
-//    var tcode = "";
-//    var select = document.getElementById("tcode");
-//    for (var i = 0; i < select.length; i++) {
-//        if (select[i].selected) {
-//            tcode = tcode + select[i].value + ",";
-//        }
-//    }
-//    tcode = tcode.slice(0, -1);
-//    /*var apiUrl = baseurl + "/rates/GetCurrencyExchangeRate/" + scode + "/" + tcode + "/" + amount + "";*/
-//    var apiUrl = baseurl + "/rates/GetCurrencyExchangeRateByPeriod/" + scode + "/"  + fromdate + "/" + todate + "";
-//    if (date) {
-//        apiUrl = apiUrl + "?date=" + date;
-//    }
-//    xmlhttp.open("GET", apiUrl, true);
-//    xmlhttp.onreadystatechange = function () {
-//        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-//            var rates = JSON.parse(xmlhttp.responseText);
-//            var tbltop = "<table class='table table-bordered'> <thead class='thead-dark'><tr><th scope='col'>Currency</th><th scope='col'>ExchangeRate</th></tr></thead>";
-//            //main table content we fill from data from the rest call
-//            var main = "";
-//            Object.entries(rates.exchangeRates).forEach(function ([curr, exRate]) {
-//                main += "<tbody><tr><td>" + curr + "</td><td>" + 250 + "</td></tr> ";
-//            });
+    xmlhttp.open("GET", apiUrl, true);
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            var rates = JSON.parse(xmlhttp.responseText);
+            var elem = document.getElementById('divalert');
+            if (rates.length == 0) {
+                elem.style.display = 'inline'
+            }
+            else {
+                elem.style.display = 'none'
+                var tbltop = "<table class='table table-bordered'> <thead class='thead-dark'><tr><th scope='col'>Recorded On</th><th scope='col'>Exchange Rate</th></tr></thead>";
+                //main table content we fill from data from the rest call
+                var main = "";
+                var arrayRecordDate = [];
+                var arrayExchangeRates = [];
+                for (var i = 0; i < rates.length; i++) {
+                    var exchange = rates[i];
+                    var recordDate = exchange.recordedON;
+                    recordDate = new Date(recordDate).toLocaleDateString('en-us', { month: "short", day: "numeric" });
+                    main += "<tbody><tr><td>" + recordDate + "</td><td>" + exchange.exchangeRates + "</td></tr> ";
+                    arrayRecordDate.unshift(recordDate);
+                    arrayExchangeRates.unshift(exchange.exchangeRates);
+                }
 
-//            var tblbottom = "</tbody></table>";
-//            var tbl = tbltop + main + tblbottom;
-//            document.getElementById("personinfo").innerHTML = tbl;
-//        }
-//    };
-//    xmlhttp.send();
+                const highest = Math.max.apply(Math, arrayExchangeRates);
+                const lowest = Math.min.apply(Math, arrayExchangeRates);
+                debugger;
+                var tblbottom = "</tbody></table>";
+                var tbl = tbltop + main + tblbottom;
+                document.getElementById("tableinfo").innerHTML = tbl;
+                const ctx = document.getElementById("currencyChart");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: arrayRecordDate,
+                        datasets: [{
+                            label: 'Exchange Rates',
+                            data: arrayExchangeRates,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                ticks: { color: 'red' }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: scode + "/" + tcode + " - High : " + highest + " " + "Low : " + lowest,
+                                    color: 'Green'
+                                },
+                                ticks: { color: 'red'}
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    };
+    xmlhttp.send();
+}
+
+function loadExchangeRates() {
+    var xmlhttp = new XMLHttpRequest();
+    var scode = document.getElementById('scode').value;
+    var tcode = document.getElementById('tcode').value;
+    var amount = document.getElementById('amount').value;
+    var date = document.getElementById('date').value;
 
 
-    
-//}
+    var apiUrl = baseurl + "/rates/GetCurrencyExchangeRate/" + scode + "/" + tcode + "/" + amount + "";
+    if (date) {
+        apiUrl = apiUrl + "?date=" + date;
+    }
+
+
+    xmlhttp.open("GET", apiUrl, true);
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            debugger;
+            var rates = JSON.parse(xmlhttp.responseText);
+            var elem = document.getElementById('divalert');
+            if (rates.length == 0) {
+                elem.style.display = 'inline'
+            }
+            else {
+                elem.style.display = 'none'
+                var tbltop = "<table class='table table-bordered'> <thead class='thead-dark'><tr><th scope='col'>Recorded On</th><th scope='col'>Exchange Rate</th></tr></thead>";
+                //main table content we fill from data from the rest call
+                var main = "";
+                Object.entries(rates.exchangeRates).forEach(function ([currency, exchangeRate]) {
+                    main += "<tbody><tr><td>" + currency + "</td><td>" + exchangeRate + "</td></tr> ";
+                });
+                var tblbottom = "</tbody></table>";
+                var tbl = tbltop + main + tblbottom;
+                document.getElementById("personinfo").innerHTML = tbl;
+            }
+        }
+    };
+    xmlhttp.send();
+}
 
 
    

@@ -97,7 +97,6 @@
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
         public async Task<bool> SaveCurrencyExchangeRate(string sourceCurrencyCode, string targetCurrencyCode)

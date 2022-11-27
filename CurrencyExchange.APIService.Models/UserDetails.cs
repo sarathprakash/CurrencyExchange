@@ -1,5 +1,4 @@
 ﻿
-
 namespace CurrencyExchange.APIService.Models
 {
     public class UserDetails
