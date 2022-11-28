@@ -1,11 +1,3 @@
-using CurrencyExchange.APIService;
-using CurrencyExchange.APIService.Contracts;
-using CurrencyExchange.APIService.DataAccess;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Serilog;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +10,7 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 Connection connection = new Connection();
 
-// Add services to the container.
+// Add/Register services to the container.
 builder.Services.AddSingleton(connection.InitializeDb());
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -67,7 +59,8 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<ICurrencyExchangeRateRepository, CurrencyExchangeRateRepository>();
 
-builder.Services.AddCors(o => o.AddPolicy("NUXT", builder =>
+//Enable Cross Orgin request
+builder.Services.AddCors(o => o.AddPolicy("AllowCrossRequestPolicy", builder =>
 {
     builder.AllowAnyOrigin()
            .AllowAnyMethod()
@@ -88,9 +81,7 @@ if (app.Environment.IsDevelopment())
     app.UseHsts();
 
 }
-app.UseCors("NUXT");
-
-
+app.UseCors("AllowCrossRequestPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();

@@ -4,13 +4,13 @@ namespace CurrencyExchange.APIService.Controllers
     [Route("api/rates")]
     public class CurrencyExchangeRateController : Controller
     {
-        private readonly ICurrencyExchangeRateRepository currencyExchangeRateRepository;
-        private readonly ILogger<CurrencyExchangeRateController> logger;
+        private readonly ICurrencyExchangeRateRepository _currencyExchangeRateRepository;
+        private readonly ILogger<CurrencyExchangeRateController> _logger;
 
-        public CurrencyExchangeRateController(ICurrencyExchangeRateRepository currencyExchangeRateRepository, ILogger<CurrencyExchangeRateController> _logger)
+        public CurrencyExchangeRateController(ICurrencyExchangeRateRepository currencyExchangeRateRepository, ILogger<CurrencyExchangeRateController> logger)
         {
-            this.currencyExchangeRateRepository = currencyExchangeRateRepository;
-            logger = _logger;
+            _currencyExchangeRateRepository = currencyExchangeRateRepository;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -19,8 +19,8 @@ namespace CurrencyExchange.APIService.Controllers
         {
             try
             {
-                logger.LogInformation("AuthorizeUser started to executing");
-                var userdetails= currencyExchangeRateRepository.GetUserDetails();
+                _logger.LogInformation("AuthorizeUser started to executing");
+                var userdetails= _currencyExchangeRateRepository.GetUserDetails();
                 string? username = userdetails[0].Username;
                 string? password = userdetails[0].Password;
 
@@ -54,7 +54,7 @@ namespace CurrencyExchange.APIService.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError("AuthorizeUser failed");
+                _logger.LogError("AuthorizeUser failed");
                 throw new Exception(ex.Message);
             }
         }
@@ -66,13 +66,13 @@ namespace CurrencyExchange.APIService.Controllers
         {
             try
             {
-                logger.LogInformation("GetCurrencyCodes started to executing");
-                var CurrencyCodesDetails = currencyExchangeRateRepository.GetCurrencyCodes();
+                _logger.LogInformation("GetCurrencyCodes started to executing");
+                var CurrencyCodesDetails = _currencyExchangeRateRepository.GetCurrencyCodes();
                 return CurrencyCodesDetails;
             }
             catch (Exception ex)
             {
-                logger.LogError("GetCurrencyCodes failed");
+                _logger.LogError("GetCurrencyCodes failed");
                 throw new Exception(ex.Message);
             }
         }
@@ -84,13 +84,13 @@ namespace CurrencyExchange.APIService.Controllers
         {
             try
             {
-                logger.LogInformation("GetCurrencyExchangeRate started to executing");
-                var exchangeRates = await currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targetCurrency, amount,null);
+                _logger.LogInformation("GetCurrencyExchangeRate started to executing");
+                var exchangeRates = await _currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targetCurrency, amount,null);
                 return exchangeRates;
             }
             catch (Exception ex)
             {
-                logger.LogError("GetCurrencyExchangeRate failed");
+                _logger.LogError("GetCurrencyExchangeRate failed");
                 throw new Exception(ex.Message);
             }
         }
@@ -100,13 +100,13 @@ namespace CurrencyExchange.APIService.Controllers
         {
             try
             {
-                logger.LogInformation("GetCurrencyExchangeRateByDate started to executing");
-                var exchangeRates = await currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targetCurrency, amount, date);
+                _logger.LogInformation("GetCurrencyExchangeRateByDate started to executing");
+                var exchangeRates = await _currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targetCurrency, amount, date);
                 return exchangeRates;
             }
             catch (Exception ex)
             {
-                logger.LogError("GetCurrencyExchangeRateByDate failed");
+                _logger.LogError("GetCurrencyExchangeRateByDate failed");
                 throw new Exception(ex.Message);
             }
         }
@@ -116,13 +116,13 @@ namespace CurrencyExchange.APIService.Controllers
         {
             try
             {
-                logger.LogInformation("GetCurrencyExchangeRateByPeriod started to executing");
-                var result = currencyExchangeRateRepository.GetCurrencyExchangeRateByPeriod(sourceCurrency, targetCurrency, fromDate, toDate);
+                _logger.LogInformation("GetCurrencyExchangeRateByPeriod started to executing");
+                var result = _currencyExchangeRateRepository.GetCurrencyExchangeRateByPeriod(sourceCurrency, targetCurrency, fromDate, toDate);
                 return result;
             }
             catch (Exception ex)
             {
-                logger.LogError("GetCurrencyExchangeRateByPeriod failed");
+                _logger.LogError("GetCurrencyExchangeRateByPeriod failed");
                 throw new Exception(ex.Message);
             }
         }
