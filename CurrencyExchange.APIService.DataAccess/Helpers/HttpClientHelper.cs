@@ -2,10 +2,10 @@
 {
     public static class HttpClientHelper
     {
-        public static string DoHttpRequest(string httpMethod, string baseURI, string requestParam, string data = "")
+        public static string DoHttpRequest(this string httpMethod, string baseURI, string requestParam, string data = "")
         {
             string responseString = "";
-            using (var client = new HttpClient())
+            using (var client = new HttpClient()) //for sending/receiving the HTTP requests/responses from API
             {
                 client.BaseAddress = new Uri(baseURI);
                 client.DefaultRequestHeaders.Accept.Clear();
