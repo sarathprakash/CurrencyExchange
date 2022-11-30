@@ -118,6 +118,44 @@ function loadExchangeRatesChart() {
     };
     xmlhttp.send();
 }
+function loadResource() {
+    var select = document.getElementById("slanguage").value;
+    var httprequest = new XMLHttpRequest();
+    var apiUrl = baseurl + "/rates/Localize?res=" + select + "";
+    httprequest.open("GET", apiUrl, true);
+    httprequest.send();
+    httprequest.onreadystatechange = function () {
+        if (httprequest.readyState === 4 && httprequest.status === 200) {
+            var rates = JSON.parse(httprequest.responseText);
+            rates.forEach(function (b) {
+                if (b.name == 'lblbaseCurrency') {
+                    document.getElementById('lblbaseCurrency').innerHTML = b.value;
+                }
+                if (b.name == 'lbltargetCurrency') {
+                    document.getElementById('lbltargetCurrency').innerHTML = b.value;
+                }
+                if (b.name == 'lblfromDate') {
+                    document.getElementById('lblfromDate').innerHTML = b.value;
+                }
+                if (b.name == 'lbltoDate') {
+                    document.getElementById('lbltoDate').innerHTML = b.value;
+                }
+                if (b.name == 'btnSubmit') {
+                    document.getElementById('btnSubmit').innerHTML = b.value;
+                }
+                if (b.name == 'legendGraph') {
+                    document.getElementById('legendGraph').innerHTML = b.value;
+                }
+                if (b.name == 'TitleGraph') {
+                    document.getElementById('TitleGraph').innerHTML = b.value;
+                }
+                if (b.name == 'TitleCalculation') {
+                    document.getElementById('TitleCalculation').innerHTML = b.value;
+                }
+            })
+        }
+    };
+}
 
 
 

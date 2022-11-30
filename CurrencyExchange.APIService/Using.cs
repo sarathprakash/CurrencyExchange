@@ -11,3 +11,7 @@ global using Microsoft.OpenApi.Models;
 global using System.Security.Claims;
 global using System.Text;
 global using Serilog;
+global using System.Globalization;
+global using CurrencyExchange.APIService.Resources;
+global using Microsoft.Extensions.Localization;
+global using System.Collections;

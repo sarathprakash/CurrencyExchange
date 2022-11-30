@@ -15,17 +15,24 @@
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="CurrencyExchangeCalculation.html">Currency Exchange Calculation</a>
+                <a id="TitleCalculation" class="nav-link active" aria-current="page" href="CurrencyExchangeCalculation.html">Currency Exchange Calculation</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="CurrencyExchangeGraph.html">Currency Exchange Graph</a>
+                <a id="TitleGraph" class="nav-link" href="CurrencyExchangeGraph.html">Currency Exchange Graph</a>
+            </li>
+            <li style="margin-left: 720px;">
+                <select class="form-control form-control-sm" name="slanguage" onchange="loadResource()" id="slanguage">
+                    <option>Language</option>
+                    <option value="en-US">English</option>
+                    <option value="nb-NO">Nynorsk</option>
+                </select>
             </li>
         </ul>
         <fieldset class="scheduler-border" style="background-color:lightgrey">
-            <legend class="scheduler-border">Currency Exchange Calculation</legend>
+            <legend id="legendCalculation" class="scheduler-border">Currency Exchange Calculation</legend>
             <div class="row">
                 <div class="form-group row">
-                    <label for="BaseCurrency" class="col-sm-2 col-form-label col-form-label-sm">Base Currency</label>
+                    <label id="lblbaseCurrency" for="BaseCurrency" class="col-sm-2 col-form-label col-form-label-sm">Base Currency</label>
                     <div class="col-sm-10">
                         <select class="form-control form-control-sm" name="scode" id="scode" required>
                         </select>
@@ -36,7 +43,7 @@
                 </div>
                 <br /><br />
                 <div class="form-group row">
-                    <label for="Target Currency" class="col-sm-2 col-form-label col-form-label-sm">Target Currency</label>
+                    <label id="lbltargetCurrency" for="Target Currency" class="col-sm-2 col-form-label col-form-label-sm">Target Currency</label>
                     <div class="col-sm-10">
                         <select class="form-control form-control-sm" name="tcode" id="tcode" required>
                         </select>
@@ -47,7 +54,7 @@
                 </div>
                 <br /><br />
                 <div class="form-group row">
-                    <label for="Amount" class="col-sm-2 col-form-label col-form-label-sm">Amount</label>
+                    <label id="lblAmount" for="Amount" class="col-sm-2 col-form-label col-form-label-sm">Amount</label>
                     <div class="col-sm-10">
                         <input name="amount" id="amount" class="form-control form-control-sm" />
                         <div class="invalid-feedback">
@@ -57,14 +64,14 @@
                 </div>
                 <br /><br />
                 <div class="form-group row">
-                    <label for="Date" class="col-sm-2 col-form-label col-form-label-sm">Date</label>
+                    <label id="lblDate" for="Date" class="col-sm-2 col-form-label col-form-label-sm">Date</label>
                     <div class="col-sm-10">
                         <input type="date" class="form-control form-control-sm" name="date" id="date" />
                     </div>
                 </div>
                 <br /><br />
                 <div class="col-sm-2">
-                    <button type="submit" onclick="loadExchangeRates()" class="btn btn-primary">Submit</button>
+                    <button id="btnSubmit" type="submit" onclick="loadExchangeRates()" class="btn btn-primary">Submit</button>
                 </div>
                 <br /><br />
                 <div id="divalert" class="alert alert-danger" style="display:none;" role="alert">

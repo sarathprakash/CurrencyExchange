@@ -10,7 +10,7 @@
                 CurrencyExchangeRateRepository currencyExchangeRateRepository = new CurrencyExchangeRateRepository(InitializeDb());
                 string sourceCurrency = "USD";
                 string targerCurrency = "INR";
-                long amount = 100;
+                decimal amount = 100;
                 DateTime date = DateTime.Now;
                 var result = await currencyExchangeRateRepository.GetCurrencyExchangeRate(sourceCurrency, targerCurrency, amount, date);
                 Assert.Single(result.ExchangeRates);

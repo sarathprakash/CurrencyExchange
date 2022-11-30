@@ -6,11 +6,26 @@ namespace CurrencyExchange.APIService.Controllers
     {
         private readonly ICurrencyExchangeRateRepository _currencyExchangeRateRepository;
         private readonly ILogger<CurrencyExchangeRateController> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedResource;
 
-        public CurrencyExchangeRateController(ICurrencyExchangeRateRepository currencyExchangeRateRepository, ILogger<CurrencyExchangeRateController> logger)
+        public CurrencyExchangeRateController(ICurrencyExchangeRateRepository currencyExchangeRateRepository, ILogger<CurrencyExchangeRateController> logger, IStringLocalizer<SharedResource> sharedResource)
         {
             _currencyExchangeRateRepository = currencyExchangeRateRepository;
             _logger = logger;
+            _sharedResource= sharedResource;
+        }
+        [HttpGet]
+        [Route("Localize")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public ActionResult <IEnumerable> Localize(string res)
+        {
+            CultureInfo.CurrentUICulture = new CultureInfo(res, false);
+            var resourceSet = _sharedResource.GetAllStrings().Select(x => new 
+            {
+                Name = x.Name,
+                Value = x.Value
+            });
+            return Ok(resourceSet);
         }
 
         [HttpGet]

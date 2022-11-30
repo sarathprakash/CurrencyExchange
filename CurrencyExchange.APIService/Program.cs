@@ -1,7 +1,7 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Register serilog here
+//Register serilog here and enable logging globally
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
@@ -57,6 +57,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddAuthorization();
 
+//Localization
+builder.Services.AddLocalization();
+var localizationOptions = new RequestLocalizationOptions();
+var supportedCultures = new[]
+{
+    new CultureInfo("en-US"),
+    new CultureInfo("nb-NO")
+};
+localizationOptions.SupportedCultures = supportedCultures;
+localizationOptions.SupportedUICultures = supportedCultures;
+localizationOptions.SetDefaultCulture("en-US");
+localizationOptions.ApplyCurrentCultureToResponseHeaders = true;
+
 builder.Services.AddScoped<ICurrencyExchangeRateRepository, CurrencyExchangeRateRepository>();
 
 //Enable Cross Orgin request
@@ -81,6 +94,7 @@ if (app.Environment.IsDevelopment())
     app.UseHsts();
 
 }
+app.UseRequestLocalization(localizationOptions);
 app.UseCors("AllowCrossRequestPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
