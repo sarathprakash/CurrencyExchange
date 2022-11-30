@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
     <script src="wwwroot/javascript/currencycalculation.js"></script>
     <script src="wwwroot/javascript/bootstrap.min.js"></script>
@@ -20,9 +21,9 @@
             <li class="nav-item">
                 <a id="TitleGraph" class="nav-link" href="CurrencyExchangeGraph.html">Currency Exchange Graph</a>
             </li>
-            <li style="margin-left: 720px;">
+            <li style="margin-left: 1180px; position: fixed ">
                 <select class="form-control form-control-sm" name="slanguage" onchange="loadResource()" id="slanguage">
-                    <option>Language</option>
+                    <!--<option>Language</option>-->
                     <option value="en-US">English</option>
                     <option value="nb-NO">Nynorsk</option>
                 </select>
@@ -84,3 +85,14 @@
     </div>
 </body>
 </html>
+<style>
+    #content {
+        position: relative;
+    }
+
+        #content img {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+</style>

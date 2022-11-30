@@ -8,7 +8,7 @@
             try
             {
                 CurrencyExchangeRateRepository currencyExchangeRateRepository = new CurrencyExchangeRateRepository(InitializeDb());
-                string sourceCurrency = "USD";
+                string sourceCurrency = "NOK";
                 string targerCurrency = "INR";
                 decimal amount = 100;
                 DateTime date = DateTime.Now;
@@ -27,7 +27,7 @@
             try
             {
                 CurrencyExchangeRateRepository currencyExchangeRateRepository = new CurrencyExchangeRateRepository(InitializeDb());
-                string sourceCurrency = "USD";
+                string sourceCurrency = "NOK";
                 string targetCurrency = "INR";
                 var result = await currencyExchangeRateRepository.SaveCurrencyExchangeRate(sourceCurrency, targetCurrency);
                 Assert.True(result);
