@@ -79,6 +79,8 @@ builder.Services.AddCors(o => o.AddPolicy("AllowCrossRequestPolicy", builder =>
            .AllowAnyMethod()
            .AllowAnyHeader();
 }));
+
+//Building serveices
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
