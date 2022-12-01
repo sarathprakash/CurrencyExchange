@@ -3,7 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=none",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "FileName": "C:\\CurrencyVersion2\\CurrencyExchangeRates-master\\Cowboy.ConsoleApp\\bin\\Debug\\net6.0\\Cowboy.ConsoleApp.exe",
+    "FileName": "C:\\Users\\sarat\\source\\repos\\CurrencyExchange\\CurrencyExchange.ConsoleApp\\bin\\Debug\\net6.0\\CurrencyExchange.ConsoleApp.exe",
     "Arguments": "SAVE NOK INR"
   }
 }

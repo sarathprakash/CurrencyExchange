@@ -14,19 +14,6 @@ namespace CurrencyExchange.APIService.Controllers
             _logger = logger;
             _sharedResource= sharedResource;
         }
-        [HttpGet]
-        [Route("Localize")]
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public ActionResult <IEnumerable> Localize(string res)
-        {
-            CultureInfo.CurrentUICulture = new CultureInfo(res, false);
-            var resourceSet = _sharedResource.GetAllStrings().Select(x => new 
-            {
-                Name = x.Name,
-                Value = x.Value
-            });
-            return Ok(resourceSet);
-        }
 
         [HttpGet]
         [Route("Authorize")]
@@ -92,9 +79,16 @@ namespace CurrencyExchange.APIService.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Get Currency Exchange Rate
+        /// </summary>
+        /// <param name="sourceCurrency"></param>
+        /// <param name="targetCurrency"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpGet]
-        [Route("GetCurrencyExchangeRate/{sourceCurrency}/{targetCurrency}/{amount}")]
+        [Route("GetLatestCurrencyExchangeRate/{sourceCurrency}/{targetCurrency}/{amount}")]
         public async Task <ActionResult<CurrencyExchangeRateModel?>> GetCurrencyExchangeRate(string sourceCurrency, string targetCurrency, long amount)
         {
             try
@@ -113,6 +107,16 @@ namespace CurrencyExchange.APIService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+        /// <summary>
+        /// Get Currency Exchange Rate By Specific Date
+        /// </summary>
+        /// <param name="sourceCurrency"></param>
+        /// <param name="targetCurrency"></param>
+        /// <param name="amount"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+
         [HttpGet]
         [Route("GetCurrencyExchangeRateByDate/{sourceCurrency}/{targetCurrency}/{amount}/{date}")]
         public async Task <ActionResult<CurrencyExchangeRateModel?>> GetCurrencyExchangeRateByDate(string sourceCurrency, string targetCurrency, long amount, DateTime? date)
@@ -133,6 +137,16 @@ namespace CurrencyExchange.APIService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+        /// <summary>
+        /// Get Currency Exchange Rate By Period Wise
+        /// </summary>
+        /// <param name="sourceCurrency"></param>
+        /// <param name="targetCurrency"></param>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+
         [HttpGet]
         [Route("GetCurrencyExchangeRateByPeriod/{sourceCurrency}/{targetCurrency}/{fromDate}/{toDate}")]
         public ActionResult<IEnumerable<CurrencyExchangeRateOnPeriodModel?>> GetCurrencyExchangeRateByPeriod(string sourceCurrency, string targetCurrency, DateTime fromDate, DateTime toDate)
@@ -152,6 +166,20 @@ namespace CurrencyExchange.APIService.Controllers
                 _logger.LogError("GetCurrencyExchangeRateByPeriod failed");
                 throw new Exception(ex.Message);
             }
+        }
+
+        [HttpGet]
+        [Route("Localize")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public ActionResult<IEnumerable> Localize(string res)
+        {
+            CultureInfo.CurrentUICulture = new CultureInfo(res, false);
+            var resourceSet = _sharedResource.GetAllStrings().Select(x => new
+            {
+                Name = x.Name,
+                Value = x.Value
+            });
+            return Ok(resourceSet);
         }
     }
 }

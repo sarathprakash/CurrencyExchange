@@ -15,13 +15,10 @@ namespace CurrencyExchange.ScheduledFunction
             try
             {
                 Process process = new Process(); // Provides access to local and remote and Process Enables to start and stop system processes.
-                                                 //string fileName = Environment.GetEnvironmentVariable(@"FileName");
-                string fileName = @"C:\Users\sarat\source\repos\CurrencyExchange\CurrencyExchange.ConsoleApp\bin\Debug\net6.0\CurrencyExchange.ConsoleApp.exe";
-                //string fileName1 = @"C:\Users\sarat\source\repos\CurrencyExchange\CurrencyExchange.ConsoleApp\bin\Debug\net6.0\CurrencyExchange.ConsoleApp.exe";
+                string fileName = Environment.GetEnvironmentVariable("FileName");
                 log.LogInformation(fileName);
                 process.StartInfo.FileName = fileName;
                 string arguments = Environment.GetEnvironmentVariable("Arguments");
-                //string arguments = "SAVE NOK INR";
                 process.StartInfo.Arguments = arguments;
                 log.LogInformation(arguments);
                 process.StartInfo.UseShellExecute = false;

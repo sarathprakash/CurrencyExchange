@@ -4,6 +4,7 @@ global using CurrencyExchange.APIService.Models;
 global using CurrencyExchange.APIService;
 global using CurrencyExchange.APIService.DataAccess;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;

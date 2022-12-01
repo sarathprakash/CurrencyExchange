@@ -51,7 +51,7 @@ function loadExchangeRates() {
     var date = document.getElementById('date').value;
 
 
-    var apiUrl = baseurl + "/rates/GetCurrencyExchangeRate/" + scode + "/" + tcode + "/" + amount + "";
+    var apiUrl = baseurl + "/rates/GetLatestCurrencyExchangeRate/" + scode + "/" + tcode + "/" + amount + "";
     if (date) {
         apiUrl = apiUrl + "?date=" + date;
     }
